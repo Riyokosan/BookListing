@@ -26,16 +26,24 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
     public static final String LOG_TAG = MainActivity.class.getName();
 
-    /**
-     * Google API URL
-     */
+    //Google API URL
     private static final String BOOK_LISTING_REQUEST_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 
 
-    /**
-     * Constant value for the book loader ID.
-     */
+    //Constant value for the book loader ID.
+
     private static final int BOOK_LISTING_LOADER_ID = 1;
+
+    /**
+     * Adapter for the list of earthquakes
+     */
+    private BookListingAdapter mAdapter;
+
+    /**
+     * TextView that is displayed when the list is empty
+     */
+    private TextView mEmptyStateTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
