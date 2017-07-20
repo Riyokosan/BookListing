@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Book Listing</string>
 
-    <string name="no_earthquakes">No book found.</string>
+    <string name="no_books">No book found.</string>
     <string name="no_connection">No internet connection.</string>
 
     <!-- Settings Menu Item [CHAR LIMIT=NONE] -->

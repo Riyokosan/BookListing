@@ -21,6 +21,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.category;
+import static android.R.attr.description;
 import static com.example.android.booklisting.MainActivity.LOG_TAG;
 
 
@@ -137,6 +139,52 @@ public class QueryUtils {
                 JSONObject currentBookListing = BookListingArray.getJSONObject(i);
 
 //-------------------------------------------To Rework-------------------------------------------------
+
+                if (baseJsonResponse.has("items")) {
+                    // Extract the JSONArray associated with the key called "items",
+                    // which represents a list of books.
+                    JSONArray bookArray = baseJsonResponse.getJSONArray("items");
+
+                    // For each book in the bookArray, create an {@link Book} object
+                    for (int i = 0; i < bookArray.length(); i++) {
+
+                        // Get a single book at position i within the list of books
+                        JSONObject currentBook = bookArray.getJSONObject(i);
+
+                        // For a given book, extract the JSONObject associated with the
+                        // key called "volumeInfo".
+                        JSONObject volumeInfo = currentBook.getJSONObject("volumeInfo");
+
+                        // Extract the value for the key called "title"
+                        String title = volumeInfo.getString("title");
+
+                        // We need a String with all authors divided with comma
+                        StringBuilder authors = new StringBuilder();
+                        if (volumeInfo.has("authors")) {
+                            // Extract the JSONArray associated with the key called authors
+                            JSONArray authorArray = volumeInfo.getJSONArray("authors");
+
+                            // For each author in the authorArray, append its value to authors StringBuilder
+                            for (int j = 0; j < authorArray.length(); j++) {
+                                authors.append(authorArray.getString(j)).append(", ");
+                            }
+                            //remove comma from the end of the string
+                            authors.setLength(authors.length() - 2);
+                        }
+
+                        String publishedDate = null;
+                        if (volumeInfo.has("publishedDate")) {
+                            // Extract the value for the key called "publishedDate"
+                            publishedDate = publishedDate.getString("publishedDate");
+                        }
+
+                        /** Create a new {@link Book} object with the title, subtitle, the String
+                         *  with the authors and the url from the JSON response.
+                         * */
+                        BookListing book = new BookListing(title, authors.toString(), publishedDate);
+
+                        // Add the new {@link Book} to the list of books
+                        books.add(book);
 
                 // For a given BookListing, extract the JSONObject associated with the
                 // key called "properties", which represents a list of all properties
