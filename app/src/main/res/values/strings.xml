@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Book Listing</string>
+
+    <string name="no_earthquakes">No book found.</string>
+    <string name="no_connection">No internet connection.</string>
+
+    <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
+    <string name="settings_menu_item">Settings</string>
+    <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
+    <string name="settings_title">Book Listing Settings</string>
+
+    <!-- Rating Image Resource Names -->
+    <string name="rating_none">rating_none</string>
+    <string name="rating_half">rating_half</string>
+    <string name="rating_one">rating_one</string>
+    <string name="rating_one_half">rating_one_half</string>
+    <string name="rating_two">rating_two</string>
+    <string name="rating_two_half">rating_two_half</string>
+    <string name="rating_three">rating_three</string>
+    <string name="rating_three_half">rating_three_half</string>
+    <string name="rating_four">rating_four</string>
+    <string name="rating_four_half">rating_four_half</string>
+    <string name="rating_five">rating_five</string>
+
+    <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order_by</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_relevance_value</string>
+
+    <!-- Label for order-by Relevance option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_relevance_label">Most Relevant</string>
+    <string name="settings_order_by_relevance_value" translatable="false">relevance</string>
+
+    <!-- Label for order-by Newest option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_most_recent_label">Newest First</string>
+    <string name="settings_order_by_most_recent_value" translatable="false">newest</string>
+
+    <!-- Strings For MaxResults Preference [CHAR LIMIT=30] -->
+    <string name="settings_maxresults_label">Max Results</string>
+    <string name="settings_maxresults_key" translatable="false">max_results</string>
+    <string name="settings_maxresults_default" translatable="false">@string/settings_maxresults_10_value</string>
+
+    <string name="settings_maxresults_5_label">5</string>
+    <string name="settings_maxresults_5_value" translatable="false">5</string>
+    <string name="settings_maxresults_10_label">10</string>
+    <string name="settings_maxresults_10_value" translatable="false">10</string>
+    <string name="settings_maxresults_15_label">15</string>
+    <string name="settings_maxresults_15_value" translatable="false">15</string>
+    <string name="settings_maxresults_20_label">20</string>
+    <string name="settings_maxresults_20_value" translatable="false">20</string>
+
+
+</resources>
