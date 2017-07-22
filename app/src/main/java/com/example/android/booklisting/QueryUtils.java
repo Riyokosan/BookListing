@@ -110,7 +110,7 @@ public class QueryUtils {
      * Return a list of {@link BookListing} objects that has been built up from
      * parsing the given JSON response.
      */
-    private static List<BookListing> extractFeatureFromJson(String BookListingJSON) throws JSONException {
+    private static List<BookListing> extractFeatureFromJson(String BookListingJSON) {
 
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(BookListingJSON)) {
@@ -208,8 +208,8 @@ public class QueryUtils {
 //                        BookListing BookListing = new BookListing(magnitude, location, time, url);
 //
 //                        // Add the new {@link BookListing} to the list of books.
-//                        books.add(BookListing);
-//                    }
+//                       books.add(BookListing);
+            }
 
             } catch(JSONException e){
                 // If an error is thrown when executing any of the above statements in the "try" block,
