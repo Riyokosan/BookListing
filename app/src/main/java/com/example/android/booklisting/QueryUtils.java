@@ -180,9 +180,11 @@ public class QueryUtils {
 
                         // Add the new {@link Book} to the list of books
                         books.add(book);
-            }
+                    }
+                }
 
-                } catch(JSONException e){
+            }
+        } catch (JSONException e) {
                     // If an error is thrown when executing any of the above statements in the "try" block,
                     // catch the exception here, so the app doesn't crash. Print a log message
                     // with the message from the exception.
