@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     @Override
     public Loader<List<BookListing>> onCreateLoader(int i, Bundle bundle) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String minMagnitude = sharedPrefs.getString(
+        String maxResults = sharedPrefs.getString(
                 getString(R.string.settings_maxresults_key),
                 getString(R.string.settings_maxresults_label));
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
         uriBuilder.appendQueryParameter("format", "geojson");
         uriBuilder.appendQueryParameter("limit", "10");
-        uriBuilder.appendQueryParameter("minmag", minMagnitude);
+        uriBuilder.appendQueryParameter("maxResults", maxResults);
         uriBuilder.appendQueryParameter("orderby", orderBy);
 
         return new BookListingLoader(this, uriBuilder.toString());
