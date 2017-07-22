@@ -133,88 +133,87 @@ public class QueryUtils {
                 // Get a single BookListing at position i within the list of books
                 JSONObject currentBookListing = BookListingArray.getJSONObject(i);
 
-//-------------------------------------------To Rework-------------------------------------------------
-
                 if (baseJsonResponse.has("items")) {
                     // Extract the JSONArray associated with the key called "items",
                     // which represents a list of books.
                     JSONArray bookArray = baseJsonResponse.getJSONArray("items");
 
-                    // For each book in the bookArray, create an {@link Book} object
-                    for (int i = 0; i < bookArray.length(); i++) {
+                    // For a given book, extract the JSONObject associated with the
+                    // key called "volumeInfo".
+                    JSONObject volumeInfo = currentBookListing.getJSONObject("volumeInfo");
 
-                        // Get a single book at position i within the list of books
-                        JSONObject currentBook = bookArray.getJSONObject(i);
+                    // Extract the value for the key called "title"
+                    String title = volumeInfo.getString("title");
 
-                        // For a given book, extract the JSONObject associated with the
-                        // key called "volumeInfo".
-                        JSONObject volumeInfo = currentBook.getJSONObject("volumeInfo");
+                    // We need a String with all authors divided with comma
+                    StringBuilder authors = new StringBuilder();
+                    if (volumeInfo.has("authors")) {
+                        // Extract the JSONArray associated with the key called authors
+                        JSONArray authorArray = volumeInfo.getJSONArray("authors");
 
-                        // Extract the value for the key called "title"
-                        String title = volumeInfo.getString("title");
-
-                        // We need a String with all authors divided with comma
-                        StringBuilder authors = new StringBuilder();
-                        if (volumeInfo.has("authors")) {
-                            // Extract the JSONArray associated with the key called authors
-                            JSONArray authorArray = volumeInfo.getJSONArray("authors");
-
-                            // For each author in the authorArray, append its value to authors StringBuilder
-                            for (int j = 0; j < authorArray.length(); j++) {
-                                authors.append(authorArray.getString(j)).append(", ");
-                            }
-                            //remove comma from the end of the string
-                            authors.setLength(authors.length() - 2);
+                        // For each author in the authorArray, append its value to authors StringBuilder
+                        for (int j = 0; j < authorArray.length(); j++) {
+                            authors.append(authorArray.getString(j)).append(", ");
                         }
-
-                        String publishedDate = null;
-                        if (volumeInfo.has("publishedDate")) {
-                            // Extract the value for the key called "publishedDate"
-                            publishedDate = publishedDate.getString("publishedDate");
-                        }
-
-                        /** Create a new {@link Book} object with the title, subtitle, the String
-                         *  with the authors and the url from the JSON response.
-                         * */
-                        BookListing book = new BookListing(title, authors.toString(), publishedDate);
-
-                        // Add the new {@link Book} to the list of books
-                        books.add(book);
+                        //remove comma from the end of the string
+                        authors.setLength(authors.length() - 2);
                     }
+
+                    String publishedDate = null;
+                    if (volumeInfo.has("publishedDate")) {
+                        // Extract the value for the key called "publishedDate"
+                        publishedDate = volumeInfo.getString("publishedDate");
+                    }
+
+                    double rating = 0.0;
+                    if (volumeInfo.has("averageRating")) {
+                        rating = volumeInfo.getDouble("averageRating");
+                    } else {
+                        rating = 0.0;
+                    }
+
+                    /** Create a new {@link Book} object with the title, subtitle, the String
+                     *  with the authors and the url from the JSON response.
+                     * */
+                    BookListing book = new BookListing(title, authors.toString(), publishedDate, rating);
+
+                    // Add the new {@link Book} to the list of books
+                    books.add(book);
                 }
-
             }
+
+
         } catch (JSONException e) {
-                    // If an error is thrown when executing any of the above statements in the "try" block,
-                    // catch the exception here, so the app doesn't crash. Print a log message
-                    // with the message from the exception.
-                    Log.e("QueryUtils", "Problem parsing the BookListing JSON results", e);
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            Log.e("QueryUtils", "Problem parsing the BookListing JSON results", e);
         }
 
-                // Return the list of books
-                return books;
-            }
+        // Return the list of books
+        return books;
+    }
 
 
-            /**
-             * Query the USGS dataset and return a list of {@link BookListing} objects.
-             */
-            public static List<BookListing> fetchBookListingData (String requestUrl){
-                // Create URL object
-                URL url = createUrl(requestUrl);
+    /**
+     * Query the USGS dataset and return a list of {@link BookListing} objects.
+     */
+    public static List<BookListing> fetchBookListingData(String requestUrl) {
+        // Create URL object
+        URL url = createUrl(requestUrl);
 
-                // Perform HTTP request to the URL and receive a JSON response back
-                String jsonResponse = null;
-                try {
-                    jsonResponse = makeHttpRequest(url);
-                } catch (IOException e) {
-                    Log.e(LOG_TAG, "Problem making the HTTP request.", e);
+        // Perform HTTP request to the URL and receive a JSON response back
+        String jsonResponse = null;
+        try {
+            jsonResponse = makeHttpRequest(url);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-                // Extract relevant fields from the JSON response and create a list of {@link BookListing}s
-                List<BookListing> books = extractFeatureFromJson(jsonResponse);
+        // Extract relevant fields from the JSON response and create a list of {@link BookListing}s
+        List<BookListing> books = extractFeatureFromJson(jsonResponse);
 
-                // Return the list of {@link BookListing}
-                return books;
+        // Return the list of {@link BookListing}
+        return books;
     }
 }
