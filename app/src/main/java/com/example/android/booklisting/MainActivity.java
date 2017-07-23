@@ -91,10 +91,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mSearchText = (EditText) findViewById(R.id.search_text_field);
     }
 
-    public String submitSearch(View view) {
-        mSearchText.getText().toString();
-        return mSearchText;
-
+    public void submitSearch(View view) {
+        search = mSearchText.getText().toString();
+        getLoaderManager().restartLoader(BOOK_LISTING_LOADER_ID, null, this);
     }
 
     @Override
