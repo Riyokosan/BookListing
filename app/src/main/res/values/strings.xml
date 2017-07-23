@@ -50,6 +50,8 @@
     <string name="settings_maxresults_20_value" translatable="false">20</string>
 
     <string name="settings_title_label">Title</string>
+    <string name="settings_title_default" translatable="false">android</string>
 
     <string name="settings_author_label">Author</string>
+
 </resources>

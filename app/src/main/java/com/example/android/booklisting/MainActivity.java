@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     public static final String LOG_TAG = MainActivity.class.getName();
 
     //Google API URL
-    private static final String BOOK_LISTING_REQUEST_URL = "https://www.googleapis.com/books/v1/volumes?q=";
+    private static final String BOOK_LISTING_REQUEST_URL = "https://www.googleapis.com/books/v1/volumes?";
 
 
     //Constant value for the book loader ID.
@@ -116,14 +116,19 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
         String orderBy = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
-                getString(R.string.settings_order_by_default)
+                getString(R.string.settings_order_by_default));
+
+        String title = sharedPrefs.getString(
+                getString(R.string.settings_title_label),
+                getString(R.string.settings_title_default)
         );
 
         Uri baseUri = Uri.parse(BOOK_LISTING_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        
+
         uriBuilder.appendQueryParameter("maxResults", maxResults);
         uriBuilder.appendQueryParameter("orderby", orderBy);
+        uriBuilder.appendQueryParameter("q", title);
 
         return new BookListingLoader(this, uriBuilder.toString());
     }
