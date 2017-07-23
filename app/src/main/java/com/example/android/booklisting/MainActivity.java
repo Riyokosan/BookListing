@@ -121,8 +121,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
         Uri baseUri = Uri.parse(BOOK_LISTING_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
-
-        uriBuilder.appendQueryParameter("format", "geojson");
+        
         uriBuilder.appendQueryParameter("maxResults", maxResults);
         uriBuilder.appendQueryParameter("orderby", orderBy);
 
