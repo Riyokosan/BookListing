@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String maxResults = sharedPrefs.getString(
                 getString(R.string.settings_maxresults_key),
-                getString(R.string.settings_maxresults_label));
+                getString(R.string.settings_maxresults_default));
 
         String orderBy = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         uriBuilder.appendQueryParameter("format", "geojson");
-        uriBuilder.appendQueryParameter("limit", "10");
         uriBuilder.appendQueryParameter("maxResults", maxResults);
         uriBuilder.appendQueryParameter("orderby", orderBy);
 
