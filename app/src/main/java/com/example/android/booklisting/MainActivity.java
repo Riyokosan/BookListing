@@ -22,7 +22,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderCallbacks<List<BookListing>> {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<BookListing>> {
 
     public static final String LOG_TAG = MainActivity.class.getName();
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     //Constant value for the book loader ID.
 
     private static final int BOOK_LISTING_LOADER_ID = 1;
-    EditText search_field;
+
     /**
      * Adapter for the list of earthquakes
      */
@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
      * TextView that is displayed when the list is empty
      */
     private TextView mEmptyStateTextView;
+
+    private EditText mSearchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,11 +88,13 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_connection);
         }
+        mSearchText = (EditText) findViewById(R.id.search_text_field);
     }
 
-    public void submitSearch(View view) {
-        search_field = (EditText) findViewById(R.id.search_text_field);
-        String searchOption = search_field.getText().toString();
+    public String submitSearch(View view) {
+        mSearchText.getText().toString();
+        return mSearchText;
+
     }
 
     @Override
@@ -123,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
         String search = sharedPrefs.getString(
                 getString(R.string.settings_search_label),
-                getString(searchOption));
+                getString(mSearchText));
 
         Uri baseUri = Uri.parse(BOOK_LISTING_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
@@ -133,6 +137,10 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         uriBuilder.appendQueryParameter("orderby", orderBy);
 
         return new BookListingLoader(this, uriBuilder.toString());
+    }
+
+    public boolean onQueryTextChange(String newText) {
+
     }
 
     @Override
