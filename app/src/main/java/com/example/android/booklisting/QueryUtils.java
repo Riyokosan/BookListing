@@ -125,7 +125,7 @@ public class QueryUtils {
 
             // Extract the JSONArray associated with the key called "features",
             // which represents a list of features (or books).
-            JSONArray BookListingArray = baseJsonResponse.getJSONArray("features");
+            JSONArray BookListingArray = baseJsonResponse.getJSONArray("items");
 
             // For each BookListing in the BookListingArray, create an {@link BookListing} object
             for (int i = 0; i < BookListingArray.length(); i++) {
