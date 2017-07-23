@@ -126,9 +126,9 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         Uri baseUri = Uri.parse(BOOK_LISTING_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
+        uriBuilder.appendQueryParameter("q", title);
         uriBuilder.appendQueryParameter("maxResults", maxResults);
         uriBuilder.appendQueryParameter("orderby", orderBy);
-        uriBuilder.appendQueryParameter("q", title);
 
         return new BookListingLoader(this, uriBuilder.toString());
     }
