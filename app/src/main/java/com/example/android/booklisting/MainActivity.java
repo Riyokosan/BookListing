@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,17 +33,15 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     //Constant value for the book loader ID.
 
     private static final int BOOK_LISTING_LOADER_ID = 1;
-
+    EditText search_field;
     /**
      * Adapter for the list of earthquakes
      */
     private BookListingAdapter mAdapter;
-
     /**
      * TextView that is displayed when the list is empty
      */
     private TextView mEmptyStateTextView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         }
     }
 
+    public void submitSearch(View view) {
+        search_field = (EditText) findViewById(R.id.search_text_field);
+        String searchOption = search_field.getText().toString();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -118,15 +121,14 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
 
-        String title = sharedPrefs.getString(
-                getString(R.string.settings_title_label),
-                getString(R.string.settings_title_default)
-        );
+        String search = sharedPrefs.getString(
+                getString(R.string.settings_search_label),
+                getString(searchOption));
 
         Uri baseUri = Uri.parse(BOOK_LISTING_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("q", title);
+        uriBuilder.appendQueryParameter("q", search);
         uriBuilder.appendQueryParameter("maxResults", maxResults);
         uriBuilder.appendQueryParameter("orderby", orderBy);
 

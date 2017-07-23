@@ -9,6 +9,9 @@
     <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
     <string name="settings_title">Book Listing Settings</string>
 
+    <string name="settings_search_label">Title or Author</string>
+    <string name="settings_search_value" translatable="false">q</string>
+
     <!-- Rating Image Resource Names -->
     <string name="rating_none">rating_none</string>
     <string name="rating_half">rating_half</string>
@@ -51,7 +54,5 @@
 
     <string name="settings_title_label">Title</string>
     <string name="settings_title_default" translatable="false">android</string>
-
-    <string name="settings_author_label">Author</string>
 
 </resources>
