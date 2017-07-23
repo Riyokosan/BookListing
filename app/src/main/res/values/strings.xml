@@ -49,5 +49,7 @@
     <string name="settings_maxresults_20_label">20</string>
     <string name="settings_maxresults_20_value" translatable="false">20</string>
 
+    <string name="settings_title_label">Title</string>
 
+    <string name="settings_author_label">Author</string>
 </resources>
