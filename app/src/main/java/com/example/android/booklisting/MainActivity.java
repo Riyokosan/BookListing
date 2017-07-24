@@ -1,7 +1,6 @@
 package com.example.android.booklisting;
 
 import android.app.LoaderManager;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
@@ -92,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public void submitSearch(View view) {
-        search = mSearchText.getText().toString();
         getLoaderManager().restartLoader(BOOK_LISTING_LOADER_ID, null, this);
     }
 
@@ -126,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         String search = sharedPrefs.getString(
                 getString(R.string.settings_search_label),
-                getString(mSearchText));
+                mSearchText.getText().toString());
 
         Uri baseUri = Uri.parse(BOOK_LISTING_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
@@ -136,10 +134,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("orderby", orderBy);
 
         return new BookListingLoader(this, uriBuilder.toString());
-    }
-
-    public boolean onQueryTextChange(String newText) {
-
     }
 
     @Override
