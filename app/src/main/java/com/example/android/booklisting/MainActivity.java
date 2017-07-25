@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public void submitSearch(View view) {
         getLoaderManager().restartLoader(BOOK_LISTING_LOADER_ID, null, this);
+        Log.i("reload", "searched entered");
     }
 
     @Override
@@ -129,10 +131,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
 
+        String search;
         if (TextUtils.isEmpty("")) {
-            String search = getString(R.string.settings_search_value);
+            search = getString(R.string.settings_search_value);
         } else {
-            String search = sharedPrefs.getString(
+            search = sharedPrefs.getString(
                     getString(R.string.settings_search_label),
                     mSearchText.getText().toString());
         }
