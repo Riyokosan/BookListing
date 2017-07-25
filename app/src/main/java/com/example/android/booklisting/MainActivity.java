@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<BookListing>> onCreateLoader(int i, Bundle bundle) {
+
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String maxResults = sharedPrefs.getString(
                 getString(R.string.settings_maxresults_key),
@@ -127,9 +129,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
 
-        String search = sharedPrefs.getString(
-                getString(R.string.settings_search_label),
-                mSearchText.getText().toString());
+        if (TextUtils.isEmpty("")) {
+            String search = getString(R.string.settings_search_value);
+        } else {
+            String search = sharedPrefs.getString(
+                    getString(R.string.settings_search_label),
+                    mSearchText.getText().toString());
+        }
 
         Uri baseUri = Uri.parse(BOOK_LISTING_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
