@@ -86,13 +86,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_connection);
-            if (mSearchText != null) {
-                mSearchText.getText().toString();
-            } else {
-                getString(R.string.settings_title_default);
-            }
         }
         mSearchText = (EditText) findViewById(R.id.search_text_field);
+//        if (mSearchText != null) {
+//            mSearchText.getText().toString();
+//        } else {
+//            getString(R.string.settings_title_default);
+//        }
     }
 
     public void submitSearch(View view) {
