@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     //Constant value for the book loader ID.
 
     private static final int BOOK_LISTING_LOADER_ID = 1;
-    Uri baseUri = Uri.parse(BOOK_LISTING_REQUEST_URL);
-    Uri.Builder uriBuilder = baseUri.buildUpon();
+
     /**
      * Adapter for the list of earthquakes
      */
@@ -42,9 +41,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      * TextView that is displayed when the list is empty
      */
     private TextView mEmptyStateTextView;
-    private EditText mSearchText;
 
-    BookListingLoader(this,uriBuilder.toString()
+    private EditText mSearchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +86,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_connection);
+            if (mSearchText != null) {
+                mSearchText.getText().toString();
+            } else {
+                getString(R.string.settings_title_default);
+            }
         }
         mSearchText = (EditText) findViewById(R.id.search_text_field);
     }
 
     public void submitSearch(View view) {
         getLoaderManager().restartLoader(BOOK_LISTING_LOADER_ID, null, this);
-    })
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,12 +116,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return super.onOptionsItemSelected(item);
     }
 
-        uriBuilder.appendQueryParameter("q",search)
-            uriBuilder.appendQueryParameter("maxResults",maxResults)
-            uriBuilder.appendQueryParameter("orderby",orderBy)
-
-            return new
-
     @Override
     public Loader<List<BookListing>> onCreateLoader(int i, Bundle bundle) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -131,15 +128,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getString(R.string.settings_order_by_default));
 
         String search = sharedPrefs.getString(
-                getString(R.string.settings_search_label);
-        if (mSearchText != null) {
-            mSearchText.getText().toString()
-        } else {
-            getString(R.string.settings_title_default)
-        }
+                getString(R.string.settings_search_label),
+                mSearchText.getText().toString());
 
-    })
-}
+        Uri baseUri = Uri.parse(BOOK_LISTING_REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("q", search);
+        uriBuilder.appendQueryParameter("maxResults", maxResults);
+        uriBuilder.appendQueryParameter("orderby", orderBy);
+
+        return new BookListingLoader(this, uriBuilder.toString());
+    }
 
     @Override
     public void onLoadFinished(Loader<List<BookListing>> loader, List<BookListing> bookListings) {
