@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             search = getString(R.string.settings_search_value);
         } else {
             search = sharedPrefs.getString(
-                    getString(R.string.settings_search_label),
+                    getString(R.string.settings_search_value),
                     mSearchText.getText().toString());
         }
 
