@@ -104,11 +104,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         /**
          * Version 2
          */
-        if (TextUtils.isEmpty("")) {
-            query = getString(R.string.settings_search_value);
-        } else {
-            query = mSearchText.getText().toString())
-        }
+        String query = editText.getText.toString();
 
     }
 
