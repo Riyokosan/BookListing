@@ -95,16 +95,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void submitSearch(View view) {
         getLoaderManager().restartLoader(BOOK_LISTING_LOADER_ID, null, this);
         Log.i("reload", "searched entered");
-
-        /**
-         * Version 1
-         */
+        
         String query = mSearchText.getEditableText().toString();
-
-        /**
-         * Version 2
-         */
-        String query = editText.getText.toString();
 
     }
 
