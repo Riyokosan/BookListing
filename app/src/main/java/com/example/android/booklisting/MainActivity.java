@@ -90,16 +90,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mEmptyStateTextView.setText(R.string.no_connection);
         }
         mSearchText = (EditText) findViewById(R.id.search_text_field);
-//        if (mSearchText != null) {
-//            mSearchText.getText().toString();
-//        } else {
-//            getString(R.string.settings_title_default);
-//        }
     }
 
     public void submitSearch(View view) {
         getLoaderManager().restartLoader(BOOK_LISTING_LOADER_ID, null, this);
         Log.i("reload", "searched entered");
+        String query = mSearchText.getEditableText().toString();
     }
 
     @Override
