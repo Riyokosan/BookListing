@@ -90,10 +90,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mSearchText = (EditText) findViewById(R.id.search_text_field);
     }
 
-    public void submitSearch(View view) {
-        getLoaderManager().initLoader(BOOK_LISTING_LOADER_ID, null, this);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -165,5 +161,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoaderReset(Loader<List<BookListing>> loader) {
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
+    }
+
+    public void submitSearch(View view) {
+        getLoaderManager().initLoader(BOOK_LISTING_LOADER_ID, null, this);
     }
 }
