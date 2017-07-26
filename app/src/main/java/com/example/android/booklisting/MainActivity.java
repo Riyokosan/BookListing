@@ -11,8 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -94,10 +92,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public void submitSearch(View view) {
         getLoaderManager().restartLoader(BOOK_LISTING_LOADER_ID, null, this);
-        Log.i("reload", "searched entered");
-        
-        String query = mSearchText.getEditableText().toString();
-
     }
 
     @Override
@@ -130,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getString(R.string.settings_order_by_default));
 
         String search;
-        if (TextUtils.isEmpty("")) {
+        if (mSearchText.getText().toString().isEmpty()) {
             search = getString(R.string.settings_search_value);
         } else {
             search = sharedPrefs.getString(
