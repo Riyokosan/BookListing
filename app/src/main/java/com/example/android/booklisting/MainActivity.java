@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mSearchText = (EditText) findViewById(R.id.search_text_field);
+
         // Find a reference to the {@link ListView} in the layout
         ListView bookListingListView = (ListView) findViewById(R.id.list);
 
@@ -87,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_connection);
         }
-        mSearchText = (EditText) findViewById(R.id.search_text_field);
     }
 
     @Override
