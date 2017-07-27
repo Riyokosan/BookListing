@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public void submitSearch(View view) {
+        
         getLoaderManager().initLoader(BOOK_LISTING_LOADER_ID, null, this);
     }
 }
