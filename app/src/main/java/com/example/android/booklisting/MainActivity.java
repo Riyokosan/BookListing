@@ -44,14 +44,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private EditText mSearchText;
 
-    private String search;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mSearchText = (EditText) findViewById(R.id.search_text_field);
 
         // Find a reference to the {@link ListView} in the layout
         ListView bookListingListView = (ListView) findViewById(R.id.list);
@@ -91,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_connection);
         }
+        mSearchText = (EditText) findViewById(R.id.search_text_field);
     }
 
     @Override
@@ -122,8 +119,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
 
+        String search;
         if (mSearchText.getText().toString().isEmpty()) {
-            search = getString(R.string.settings_search_default);
+            search = getString(R.string.settings_search_value);
         } else {
             search = sharedPrefs.getString(
                     getString(R.string.settings_search_value),
@@ -166,7 +164,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public void submitSearch(View view) {
-        
         getLoaderManager().initLoader(BOOK_LISTING_LOADER_ID, null, this);
     }
 }
