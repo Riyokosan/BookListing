@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private EditText mSearchText;
 
+    private String search;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,8 +121,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         String orderBy = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
-
-        String search;
+        
         if (mSearchText.getText().toString().isEmpty()) {
             search = getString(R.string.settings_search_value);
         } else {
