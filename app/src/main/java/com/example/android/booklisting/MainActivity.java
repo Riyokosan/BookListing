@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         String orderBy = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
-        
+
         if (mSearchText.getText().toString().isEmpty()) {
             search = getString(R.string.settings_search_value);
         } else {
@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public void submitSearch(View view) {
-        getLoaderManager().initLoader(BOOK_LISTING_LOADER_ID, null, this);
+        search = mSearchText.getText().toString();
+        getLoaderManager().restartLoader(BOOK_LISTING_LOADER_ID, null, this);
     }
 }
