@@ -49,38 +49,10 @@ public class BookListing {
     }
 
     /**
-     * Setter method - Title
-     */
-    public void setTitle(String title) {
-        mTitle = title;
-    }
-
-    /**
      * Getter method - Author
      */
     public String getAuthor() {
         return mAuthor;
-    }
-
-    /**
-     * Setter method - Author
-     */
-    public void setAuthor(String author) {
-        mAuthor = author;
-    }
-
-    /**
-     * Getter method - Published Date
-     */
-    public String getPublishedDate() {
-        return mPublishedDate;
-    }
-
-    /**
-     * Setter method - Published Date
-     */
-    public void setPublishedDate(String publishedDate) {
-        mPublishedDate = publishedDate;
     }
 
     /**
@@ -90,10 +62,4 @@ public class BookListing {
         return mRating;
     }
 
-    /**
-     * Setter method - Rating
-     */
-    public void setRating(double rating) {
-        mRating = rating;
-    }
 }
