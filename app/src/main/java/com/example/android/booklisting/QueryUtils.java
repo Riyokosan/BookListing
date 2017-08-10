@@ -23,6 +23,8 @@ import static com.example.android.booklisting.MainActivity.LOG_TAG;
 
 public class QueryUtils {
 
+    private static JSONArray BookListingArray;
+
     private QueryUtils() {
     }
 
@@ -125,7 +127,11 @@ public class QueryUtils {
 
             // Extract the JSONArray associated with the key called "features",
             // which represents a list of features (or books).
-            JSONArray BookListingArray = baseJsonResponse.getJSONArray("items");
+            if (baseJsonResponse.has("items")) {
+                BookListingArray = baseJsonResponse.getJSONArray("items");
+            } else {
+                BookListingArray = null;
+            }
 
             // For each BookListing in the BookListingArray, create an {@link BookListing} object
             for (int i = 0; i < BookListingArray.length(); i++) {
