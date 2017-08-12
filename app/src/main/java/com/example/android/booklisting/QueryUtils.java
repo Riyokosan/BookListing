@@ -130,7 +130,7 @@ public class QueryUtils {
             if (baseJsonResponse.has("items")) {
                 BookListingArray = baseJsonResponse.getJSONArray("items");
             } else {
-                BookListingArray = null;
+                return null;
             }
 
             // For each BookListing in the BookListingArray, create an {@link BookListing} object
