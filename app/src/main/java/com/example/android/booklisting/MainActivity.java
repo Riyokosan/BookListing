@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     //Google API URL
     private static final String BOOK_LISTING_REQUEST_URL = "https://www.googleapis.com/books/v1/volumes?";
 
-
     //Constant value for the book loader ID.
 
     private static final int BOOK_LISTING_LOADER_ID = 1;
@@ -45,6 +44,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private EditText mSearchText;
 
     private String search;
+
+    private boolean mNetworkStatus() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,24 +171,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public void submitSearch(View view) {
-        // Get a reference to the ConnectivityManager to check state of network connectivity
-        ConnectivityManager connMgr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        // Get details on the currently active default data network
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        // If there is a network connection, fetch data
-        if (networkInfo != null && networkInfo.isConnected()) {
+        if (mNetworkStatus()) {
             search = mSearchText.getText().toString();
             getLoaderManager().restartLoader(BOOK_LISTING_LOADER_ID, null, this);
         } else {
-            // Otherwise, display error
-            // First, hide loading indicator so error message will be visible
-            View loadingIndicator = findViewById(R.id.loading_indicator);
-            loadingIndicator.setVisibility(View.GONE);
-
-            // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_connection);
         }
     }

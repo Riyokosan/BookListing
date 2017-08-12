@@ -21,7 +21,7 @@ import java.util.List;
 import static com.example.android.booklisting.MainActivity.LOG_TAG;
 
 
-public class QueryUtils {
+public final class QueryUtils {
 
     private static JSONArray BookListingArray;
 
@@ -171,7 +171,7 @@ public class QueryUtils {
                         publishedDate = volumeInfo.getString("publishedDate");
                     }
 
-                    double rating = 0.0;
+                    double rating;
                     if (volumeInfo.has("averageRating")) {
                         rating = volumeInfo.getDouble("averageRating");
                     } else {
