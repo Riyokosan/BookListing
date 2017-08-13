@@ -175,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             search = mSearchText.getText().toString();
             getLoaderManager().restartLoader(BOOK_LISTING_LOADER_ID, null, this);
         } else {
+            mAdapter.clear();
             mEmptyStateTextView.setText(R.string.no_connection);
         }
     }
